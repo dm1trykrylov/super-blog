@@ -133,5 +133,3 @@ dmypy.json
 
 # other
 /migrations
-app.db
-config.py
