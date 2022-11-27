@@ -2,12 +2,6 @@ Super-blog web application
 =================
 Simple blog web application made with Flask.
 
-**Table of Contents**
-
-- [Features](#features)
-- [Installing](#installing)
-- [Contact](#contact)
-
 
 # Features
 * Register, log in, log out
