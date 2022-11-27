@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - Super-blog</title>
+      {% else %}
+      <title>Welcome to Super-blog</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>Super-blog: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
