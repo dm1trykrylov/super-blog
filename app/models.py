@@ -22,6 +22,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    comments = db.relationship('Comment', backref='author', lazy='dynamic')
     bio = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.now)
     followed = db.relationship(
@@ -77,10 +78,23 @@ class Post(db.Model):
     body = db.Column(db.String(300))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    replies = db.relationship('Comment',
+                              foreign_keys='Comment.parent_id',
+                              backref='root', lazy='dynamic')
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
 
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String(300))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.now)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    parent_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+
+    def __repr__(self):
+        return '<Comment {}>'.format(self.body)
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -28,9 +28,13 @@
         {% else %}
         <li>
           <a href="{{ url_for('messages') }}">
-            Messages
+              Messages
+              {% set new_messages = current_user.new_messages() %}
+              {% if new_messages %}
+              <span class="badge">{{ new_messages }}</span>
+              {% endif %}
           </a>
-        </li>
+      </li>
         <li><a href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
         <li><a href="{{ url_for('logout') }}">Logout</a></li>
         {% endif %}

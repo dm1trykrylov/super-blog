@@ -1,8 +1,8 @@
 from flask import render_template, flash, redirect, url_for, request, current_app
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, PostForm, MessageForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, PostForm, MessageForm, ReplyForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Post, Message
+from app.models import User, Post, Message, Comment
 from datetime import datetime
 
 
@@ -33,10 +33,7 @@ def index():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
+    posts = user.posts.order_by(Post.timestamp.desc()).all()
     form = EmptyForm()
     return render_template('user.html', user=user, posts=posts, form=form)
 
@@ -141,6 +138,18 @@ def follow(username):
         db.session.commit()
         flash('You are following {}!'.format(username))
         return redirect(url_for('user', username=username))
+    else:
+        return redirect(url_for('index'))
+
+@app.route('/reply_to/<post_id>', methods=['POST'])
+@login_required
+def reply(post_id):
+    form = ReplyForm()
+    if form.validate_on_submit():
+        comment = Comment(body=form.post.data, author=current_user, parent_id = post_id)
+        db.session.add(comment)
+        db.session.commit()
+        return redirect(url_for('index'))
     else:
         return redirect(url_for('index'))
 
