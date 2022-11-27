@@ -2,10 +2,9 @@ Super-blog web application
 =================
 Simple blog web application made with Flask.
 
-
 # Features
 * Register, log in, log out
-* Add personal information in Profile, bio
+* Add personal information in Profile
 * Write blog posts
 * Comment on other's posts
 * Follow users
