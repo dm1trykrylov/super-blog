@@ -1,7 +1,16 @@
-<hr>
-      <a href="{{ url_for('user', username=post.author.username) }}">
-        {{ post.author.username }}
-      </a>
-      wrote:<br>{{ post.body }}
-      <p align="right"  style="color: grey;">{{post.timestamp}}</p>
-    
+<table class="table table-hover">
+  <tr>
+    <div class="col-md-4">
+      <td>
+          <a href="{{ url_for('user', username=post.author.username) }}">
+              {{ post.author.username }}
+          </a>
+          says:
+          <br>
+          {{ post.body }}
+          <br>
+          <p align="right">{{ post.timestamp }}</p>
+      </td>
+    </div>
+  </tr>
+</table>
