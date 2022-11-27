@@ -8,12 +8,12 @@ def index():
     user = {'username': 'Dmitry'} # mock user
     posts = [
         {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
+            'author': {'username': 'Robin'},
+            'body': 'Hi from Leuvenford!'
         },
         {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
+            'author': {'username': 'Gavain'},
+            'body': 'Hi'
         }
     ]
     return render_template('index.html', title='Home', user=user)
