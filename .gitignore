@@ -130,3 +130,8 @@ dmypy.json
 
 # dotenv
 .flaskenv
+
+# other
+/migrations
+app.db
+config.py
