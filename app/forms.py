@@ -34,6 +34,9 @@ class EditProfileForm(FlaskForm):
     bio = TextAreaField('Bio', validators=[Length(min=0, max=140)])
     submit = SubmitField('Submit')
 
+class DeleteProfileForm(FlaskForm):
+    submit = SubmitField('Submit')
+
 
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
@@ -41,7 +44,7 @@ class EmptyForm(FlaskForm):
 class ReplyForm(FlaskForm):
     post = TextAreaField('Write something', validators=[
         DataRequired(), Length(min=1, max=300)])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Comment')
 
 class PostForm(FlaskForm):
     post = TextAreaField('Write something', validators=[

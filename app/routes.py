@@ -1,6 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request, current_app
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, PostForm, MessageForm, ReplyForm
+from app.forms import (LoginForm, RegistrationForm, EditProfileForm, EmptyForm,
+                       PostForm, MessageForm, ReplyForm, DeleteProfileForm)
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Post, Message, Comment
 from datetime import datetime
@@ -55,6 +56,20 @@ def edit_profile():
                            form=form)
 
 
+@app.route('/delete_profile', methods=['GET', 'POST'])
+@login_required
+def delete_profile():
+    form = DeleteProfileForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=current_user.username).first()
+        db.session.delete(user)
+        db.session.commit()
+        flash('Your changes have been saved. Bye.')
+        return redirect(url_for('index'))
+    return render_template('delete_profile.html', title='DELETE Profile',
+                           form=form)
+
+
 @app.route('/explore')
 @login_required
 def explore():
@@ -77,6 +92,7 @@ def send_message(recipient):
     return render_template('send_message.html', title='Send Message',
                            form=form, recipient=recipient)
 
+
 @app.route('/messages')
 @login_required
 def messages():
@@ -85,6 +101,7 @@ def messages():
     messages = current_user.messages_received.order_by(
         Message.timestamp.desc())
     return render_template('messages.html', messages=messages)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -141,12 +158,14 @@ def follow(username):
     else:
         return redirect(url_for('index'))
 
+
 @app.route('/reply_to/<post_id>', methods=['POST'])
 @login_required
 def reply(post_id):
     form = ReplyForm()
     if form.validate_on_submit():
-        comment = Comment(body=form.post.data, author=current_user, parent_id = post_id)
+        comment = Comment(body=form.post.data,
+                          author=current_user, parent_id=post_id)
         db.session.add(comment)
         db.session.commit()
         return redirect(url_for('index'))
