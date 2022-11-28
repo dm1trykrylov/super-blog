@@ -4,9 +4,13 @@
   <tr>
     <div class="col-md-4">
       <td>
+        {% if comment.author.username %}
         <a href="{{ url_for('user', username=comment.author.username) }}">
           {{ comment.author.username }}
         </a>
+        {% else %}
+        DELETED
+        {% endif %}
           wrote:
           <br>
           {{ comment.body }}

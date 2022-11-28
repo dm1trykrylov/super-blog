@@ -4,7 +4,7 @@
   <tr>
     <div class="col-md-4">
       <td>
-          {% if post.author %}
+          {% if post.author.username %}
           <a href="{{ url_for('user', username=post.author.username) }}">
               {{ post.author.username }}
           </a>
