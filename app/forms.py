@@ -48,7 +48,7 @@ class ReplyForm(FlaskForm):
 
 class PostForm(FlaskForm):
     post = TextAreaField('Write something', validators=[
-        DataRequired(), Length(min=1, max=900)])
+        DataRequired(), Length(min=1, max=2000)])
     submit = SubmitField('Submit')
 
 class MessageForm(FlaskForm):
