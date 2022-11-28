@@ -10,6 +10,16 @@ Simple blog web application made with Flask.
 * Follow users
 * Write direct messages
 
+# Launch locally
+* Clone repository
+* Install requirements
+* Run Flask:
+```
+export FLASK_APP=blog.py
+flask run
+```
+* Open `http://localhost:5000/`
+
 # Contacts
 * Name: Dmitry Krylov
 * Group: Б05-202
