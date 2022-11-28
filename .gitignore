@@ -134,3 +134,4 @@ dmypy.json
 # other
 /migrations
 tmp.txt
+app.db
