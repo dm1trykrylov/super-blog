@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>DELETE Profile</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p style="color: red;">Are you sure you want to delete your profile</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
