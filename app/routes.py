@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request, current_app
 from app import app, db
 from app.forms import (LoginForm, RegistrationForm, EditProfileForm, EmptyForm,
-                       PostForm, MessageForm, ReplyForm, DeleteProfileForm)
+                       PostForm, MessageForm, ReplyForm, DeleteProfileForm, HelpForm)
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Post, Message, Comment
 from datetime import datetime
@@ -29,6 +29,12 @@ def index():
     return render_template("index.html", title='Home Page', form=form,
                            posts=posts)
 
+@app.route('/help')
+def help():
+    form = HelpForm()
+    with open('app/help.txt') as f:
+        help_message = f.readlines()
+    return render_template("help.html", title='Help', form=form, help_message = help_message)
 
 @app.route('/user/<username>')
 @login_required

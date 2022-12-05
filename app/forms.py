@@ -41,6 +41,9 @@ class DeleteProfileForm(FlaskForm):
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
 
+class HelpForm(FlaskForm):
+    pass
+
 class ReplyForm(FlaskForm):
     post = TextAreaField('Write something', validators=[
         DataRequired(), Length(min=1, max=300)])
