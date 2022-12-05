@@ -9,6 +9,7 @@ Simple blog web application made with Flask.
 * Comment on other's posts
 * Follow users
 * Write direct messages
+* FAQ at /help page
 
 # Launch locally
 * Clone repository
