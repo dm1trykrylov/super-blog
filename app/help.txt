@@ -1,0 +1,13 @@
+FAQ
+
+Q: Why can't I log in?
+A: If you are new user, go to registration page. Otherwise check your username (maye it's already taken) and email (should be in appropriate format)
+
+Q: Can I restore deleted account?
+A: No(
+
+Q: Which posts are shown on my home page?
+A: Your's and posts of pople you are following.
+
+Q: Why do you need my email?
+A: Curretly it is not used anywhere. Password recovery via email is to be done.

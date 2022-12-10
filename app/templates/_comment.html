@@ -1,0 +1,22 @@
+{% import 'bootstrap/wtf.html' as wtf %}
+
+<table class="table table-hover">
+  <tr>
+    <div class="col-md-4">
+      <td>
+        {% if comment.author.username %}
+        <a href="{{ url_for('user', username=comment.author.username) }}">
+          {{ comment.author.username }}
+        </a>
+        {% else %}
+        DELETED
+        {% endif %}
+          wrote:
+          <br>
+          {{ comment.body }}
+          <br>
+          <p align="right">{{ comment.timestamp }}</p>
+      </td>
+    </div>
+  </tr>
+</table>

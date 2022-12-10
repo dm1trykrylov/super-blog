@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+    <h1>Help</h1>
+    {% for line in help_message %}
+      <p>{{line}}</p>
+    {% endfor %}
+{% endblock %}
