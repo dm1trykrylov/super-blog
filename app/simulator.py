@@ -1,6 +1,6 @@
 # import necessary packages
-#import pandas as pd
-import numpy as np
+# import pandas as pd
+# import numpy as np
 import sympy as sp
 #from sympy.plotting import plot
 import matplotlib.pyplot as plt
@@ -15,7 +15,7 @@ def differentiate(X, Y):
     for i in range(step, len(X)):
         slope = (Y[i] - Y[i - step]) / (X[i] - X[i - step])
         slopes.append(slope)
-    return np.array(slopes)
+    return slopes
 
 def simulate(l_0, l_1, l_2, l_3, filename1, filename2):
   # angle
@@ -44,7 +44,8 @@ def simulate(l_0, l_1, l_2, l_3, filename1, filename2):
   phi_3 = phi_3.subs(phi_1, phi_1 / 180 * sp.pi)
 
   # generate points to plot
-  X = np.linspace(0, 360, points_count)
+  pts_step = 360 / points_count
+  X = [pts_step * x for x in range(points_count)]
   Y2 = [phi_2.subs(phi_1, x) for x in X]
   Y3 = [phi_3.subs(phi_1, x) for x in X]
   # convert to degrees
