@@ -5,7 +5,12 @@ from app.forms import (LoginForm, RegistrationForm, EditProfileForm, EmptyForm,
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Post, Message, Comment
 from datetime import datetime
+import os
+from app.simulator import simulate
 
+
+IMG_FOLDER = os.path.join('static', 'IMG')
+app.config['UPLOAD_FOLDER'] = IMG_FOLDER
 
 @app.before_request
 def before_request():
@@ -197,3 +202,16 @@ def unfollow(username):
         return redirect(url_for('user', username=username))
     else:
         return redirect(url_for('index'))
+
+@app.route('/simulator', methods=['POST', 'GET'])
+@login_required
+def simulator():
+    form = PostForm()
+    if form.validate_on_submit():
+        data = form.post.data
+        values = list(map(float, data.split()))
+        full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'result.jpg')
+        simulate(values[0], values[1], values[2], values[3], 'app/' + full_filename)
+        return render_template('simulator.html', title='Simulator', form = form, user_image = full_filename)
+    else:
+        return render_template('simulator.html', title='Simulator', form = form)

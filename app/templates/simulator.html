@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <h1>Enter lengths of links in format "l0 l1 l2 l3"</h1>
+    {% if form %}
+    {{ wtf.quick_form(form) }}
+    <br>
+    {% endif %}
+    <img src="{{ user_image }}" alt="User Image" height="480px" width="600px">
+{% endblock %}
