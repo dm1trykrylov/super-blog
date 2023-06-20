@@ -210,8 +210,9 @@ def simulator():
     if form.validate_on_submit():
         data = form.post.data
         values = list(map(float, data.split()))
-        full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'result.jpg')
-        simulate(values[0], values[1], values[2], values[3], 'app/' + full_filename)
-        return render_template('simulator.html', title='Simulator', form = form, user_image = full_filename)
+        full_filename1 = os.path.join(app.config['UPLOAD_FOLDER'], 'angles.jpg')
+        full_filename2 = os.path.join(app.config['UPLOAD_FOLDER'], 'velocities.jpg')
+        simulate(values[0], values[1], values[2], values[3], 'app/' + full_filename1, 'app/' + full_filename2)
+        return render_template('simulator.html', title='Simulator', form = form, user_image1 = full_filename1, user_image2 = full_filename2)
     else:
         return render_template('simulator.html', title='Simulator', form = form)

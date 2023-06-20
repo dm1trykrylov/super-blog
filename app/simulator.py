@@ -8,8 +8,16 @@ import matplotlib.pyplot as plt
 # setup
 data_filename = './data.csv'
 points_count = 50
+step = 8
 
-def simulate(l_0, l_1, l_2, l_3, filename):
+def differentiate(X, Y):
+    slopes = []
+    for i in range(step, len(X)):
+        slope = (Y[i] - Y[i - step]) / (X[i] - X[i - step])
+        slopes.append(slope)
+    return np.array(slopes)
+
+def simulate(l_0, l_1, l_2, l_3, filename1, filename2):
   # angle
   phi_1 = sp.symbols('\phi_1')
   # links
@@ -43,6 +51,7 @@ def simulate(l_0, l_1, l_2, l_3, filename):
   Y2 = [y / sp.pi * 180 for y in Y2]
   Y3 = [y / sp.pi * 180 + 180 for y in Y3]
 
+  # plot angles
   fg = plt.axes()
   fg.plot(X, Y2, color = 'blue', label = r'$\phi_2$')
   fg.plot(X, Y3, color = 'orange', label = r'$\phi_3$')
@@ -50,5 +59,20 @@ def simulate(l_0, l_1, l_2, l_3, filename):
   fg.grid(which="major", linestyle='-')
   fg.grid(which="minor", linestyle=':')
   plt.legend()
-  plt.savefig(filename, dpi=300)
+  plt.savefig(filename1, dpi=300)
+
+  # get angular velocities
+  w2 = differentiate(X, Y2)
+  w3 = differentiate(X, Y3)
+  T = X[step:]
+
+  # plot angular velocities
+  fg.clear()
+  fg.plot(T, w2, color = 'blue', label = r'$\omega_2$')
+  fg.plot(T, w3, color = 'orange', label = r'$\omega_3$')
+  fg.set_xlabel(r'$t, s \quad \omega_1 = 1 rad / s$')
+  fg.grid(which="major", linestyle='-')
+  fg.grid(which="minor", linestyle=':')
+  plt.legend()
+  plt.savefig(filename2, dpi=300)
 
