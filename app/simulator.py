@@ -53,6 +53,7 @@ def simulate(l_0, l_1, l_2, l_3, filename1, filename2):
   Y3 = [y /  pi * 180 + 180 for y in Y3]
 
   # plot angles
+  plt.clf()
   fg = plt.axes()
   fg.plot(X, Y2, color = 'blue', label = r'$\phi_2$')
   fg.plot(X, Y3, color = 'orange', label = r'$\phi_3$')
@@ -68,7 +69,8 @@ def simulate(l_0, l_1, l_2, l_3, filename1, filename2):
   T = X[step:]
 
   # plot angular velocities
-  fg.clear()
+  plt.clf()
+  fg = plt.axes()
   fg.plot(T, w2, color = 'blue', label = r'$\omega_2$')
   fg.plot(T, w3, color = 'orange', label = r'$\omega_3$')
   fg.set_xlabel(r'$t, s \quad \omega_1 = 1 rad / s$')
